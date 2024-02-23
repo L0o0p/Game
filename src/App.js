@@ -4,7 +4,8 @@ import './App.css';
 // 任务二：数值可变
 // 任务三：单位操作
 // 任务四：交替落子
-// 任务五：阻止覆盖
+// 任务五：阻止覆盖 <-存在疑难:胜者定义函数的方法设定
+// 任务六: 宣告胜者/通知下一位
 function App() {
 
   //定义状态
@@ -40,6 +41,14 @@ function App() {
     }
     return null;
   }
+
+  // 函数：宣告胜者/同志下一位
+  function Announcer() {
+    let X
+    chAnge ? X = '+' : X = '-'
+    // eslint-disable-next-line no-useless-concat
+    return "< turn to " + "'" + X + "'" + ">"
+  }
   // 函数：响应事件
   function changeEvent(i) {
     const newchessLayout = chessLayout.slice()
@@ -58,6 +67,7 @@ function App() {
 
   return (
     <>
+      <div className='Announcer'><Announcer /></div>
       <div className="board-row">
         <Box value={chessLayout[0]} onBoxClick={() => changeEvent(0)} />
         <Box value={chessLayout[1]} onBoxClick={() => changeEvent(1)} />
