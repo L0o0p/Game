@@ -20,18 +20,40 @@ function App() {
 
   // let str = chessLayout;
 
+  // 函数：胜者判断
+  function ifWin(chessLayout) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (chessLayout[a] && chessLayout[a] === chessLayout[b] && chessLayout[a] === chessLayout[c]) {
+        return chessLayout[a];
+      }
+    }
+    return null;
+  }
+  // 函数：响应事件
   function changeEvent(i) {
     const newchessLayout = chessLayout.slice()
-    //根据当前chAnge状态 - 交替落子
-    if (newchessLayout[i] === 0) {
-      // 更新当前格子
-      chAnge ? newchessLayout[i] = '+' : newchessLayout[i] = '-'
-      // 更新棋局
-      setChesslayout(newchessLayout)
-      // 改变交替落子状态chAnge
-      setChange(!chAnge)
-      console.log("click");
-    }
+    const ifNowwin = ifWin(newchessLayout)
+    //根据当前chAnge状态 - 交替落子||是否已经决出胜负:如果位置已经有子/已决出则立即返回不执行操作
+    if (newchessLayout[i] !== 0 || ifNowwin) { return }
+    // 更新当前格子
+    chAnge ? newchessLayout[i] = '+' : newchessLayout[i] = '-'
+    // 更新棋局
+    setChesslayout(newchessLayout)
+    // 改变交替落子状态chAnge
+    setChange(!chAnge)
+    console.log("click");
+
   }
 
   return (
