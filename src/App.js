@@ -1,25 +1,44 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+
+  // {/* //定义状态
+  //     // 状态一：单个棋盘格子内的棋子
+  const [chess, setChess] = useState(0);
+
+  //     //组件一：棋盘格子 */}
+  function Square({ value, onSqClick }) {
+    return (<button onClick={handleClick}>{value}</button>)
+  }
+
+  let str = chess;
+
+  function handleClick() {
+    setChess(1)
+    console.log("click");
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="board-row">
+        <Square value={str} onSqClick={handleClick} />
+        <Square value={str} />
+        <Square value={str} />
+      </div>
+      <div className="board-row">
+        <Square value={str} />
+        <Square value={str} />
+        <Square value={str} />
+      </div>{" "}
+      <div className="board-row">
+        <Square value={str} />
+        <Square value={str} />
+        <Square value={str} />
+      </div>
+    </>
   );
+
 }
 
 export default App;
